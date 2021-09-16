@@ -6,10 +6,16 @@ import Rating from '@material-ui/lab/Rating';
 
 import useStyles from './styles';
 
-const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
+const Map = ({
+  setCoordinates,
+  setBounds,
+  coordinates,
+  places,
+  setChildClicked,
+}) => {
   // const Map = () => {
   const classes = useStyles();
-  const isDesktop = useMediaQuery('(min-width:600px)');
+  const isDesktop = useMediaQuery('(min-width:700px)');
   // const coordinates = { lat: 39.113014, lng: -105.358887 };
 
   return (
@@ -27,7 +33,7 @@ const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
           setCoordinates({ lat: e.center.lat, lng: e.center.lng });
           setBounds({ ne: e.marginBounds.ne, sw: e.marginBounds.sw });
         }}
-        onChildClick={''}
+        onChildClick={child => setChildClicked(child)}
       >
         {places?.map((place, i) => (
           <div
@@ -56,7 +62,11 @@ const Map = ({ setCoordinates, setBounds, coordinates, places }) => {
                   }
                   alt={place.name}
                 />
-                <Rating size='small' value={Number(place.rating)} readOnly />
+                <Rating
+                  size='small'
+                  value={Number(place.rating)}
+                  name='read-only'
+                />
               </Paper>
             )}
           </div>

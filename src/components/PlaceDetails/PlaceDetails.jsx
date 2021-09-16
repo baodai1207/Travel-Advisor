@@ -14,9 +14,12 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import Rating from '@material-ui/lab/Rating';
 import useStyles from './styles';
 
-const PlaceDetails = ({ place }) => {
+const PlaceDetails = ({ place, selected, refProp }) => {
   // console.log(place);
   const classes = useStyles();
+  if (selected)
+    refProp?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
   return (
     <Card elevation={6}>
       <CardMedia
@@ -34,19 +37,19 @@ const PlaceDetails = ({ place }) => {
         </Typography>
         <Box display='flex' justifyContent='space-between'>
           <Rating value={Number(place.rating)} readOnly />
-          <Typography gutternBottom variant='subtitle1'>
+          <Typography gutterBottom variant='subtitle1'>
             out of {place.num_reviews}
           </Typography>
         </Box>
         <Box display='flex' justifyContent='space-between'>
           <Typography variant='subtitle1'>Price</Typography>
-          <Typography gutternBottom variant='subtitle1'>
+          <Typography gutterBottom variant='subtitle1'>
             {place.price_level}
           </Typography>
         </Box>
         <Box display='flex' justifyContent='space-between'>
           <Typography variant='subtitle1'>Ranking</Typography>
-          <Typography gutternBottom variant='subtitle1'>
+          <Typography gutterBottom variant='subtitle1'>
             {place.ranking}
           </Typography>
         </Box>
@@ -55,7 +58,7 @@ const PlaceDetails = ({ place }) => {
             my={1}
             display='flex'
             justifyContent='space-between'
-            alighItem='center'
+            alignItem='center'
           >
             <img src={award.images.small} alt={award.display_name}></img>
             <Typography variant='subtitle2' color='textSecondary'>
